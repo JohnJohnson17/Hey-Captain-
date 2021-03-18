@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using TMPro;
 
 public class GameOverScript : MonoBehaviour
 {
-    public TMP_Text pointsText;
+    public Text pointsText;
 
     public void setup (int score)
     {
@@ -18,10 +17,5 @@ public class GameOverScript : MonoBehaviour
     public void restartButton()
     {
         SceneManager.LoadScene("GameScene");
-    }
-
-    public void menuButton()
-    {
-        SceneManager.LoadScene("MenuScene");
     }
 }

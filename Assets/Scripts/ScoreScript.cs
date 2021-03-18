@@ -2,28 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class ScoreScript : MonoBehaviour
 {
-    public static int scoreVal;
+    public static int scoreVal = 0;
 
-    TMP_Text score;
+    Text score;
     // Start is called before the first frame update
     void Start()
     {
-        score = GetComponent<TMP_Text> ();
+        score = GetComponent<Text> ();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (scoreVal < 0)
-        {
-            score.text = "" + 0;
-        } else
-        {
-            score.text = "" + scoreVal;
-        }
+        score.text = "" + scoreVal;
     }
 }

@@ -13,58 +13,50 @@ public class ColumnBehavior : MonoBehaviour
     public float throwForce = 0.3f;
 
     public float columnPosX;
-    public float columnPosY;
 
     public bool getSide;
-    public bool hasSwiped;
 
     public GameOverScript GameOverScreen;
 
     private void Start()
     {
-        ScoreScript.scoreVal = -1;
-        getSide = false;
+        ScoreScript.scoreVal = 0;
     }
 
     void Update()
     {
         columnPosX = GameObject.Find("Basic Column").transform.position.x;
 
-        columnPosY = GameObject.Find("Basic Column").transform.position.y;
-
         swipe();
 
         updateScore(columnPosX);
 
-        GameOver(columnPosY);
+        GameOver(columnPosX);
         
     }
 
     void updateScore(float x)
     {
-        if (x > 0.004)
+        if (x > 0.0)
         {
-            if (getSide)
+            if (getSide == true)
             {
                 incrementScore();
-                hasSwiped = false;
-            } else if (ScoreScript.scoreVal < 0) {
-                incrementScore();
-                hasSwiped = false;
             }
 
             getSide = false;
 
-        } else if (x < 0.002)
+        }
+
+        if (x < 0.0)
         {
             if (!getSide)
             {
-                hasSwiped = false;
                 incrementScore();
             }
 
             getSide = true;
-        } 
+        }
     }
 
     void incrementScore()
@@ -74,7 +66,7 @@ public class ColumnBehavior : MonoBehaviour
 
     void GameOver(float x)
     {
-        if (x < -2.0)
+        if (x > 1.2 || x < -1.2)
         {
             GameOverScreen.setup(ScoreScript.scoreVal);
             isGameOver = true;
@@ -83,9 +75,8 @@ public class ColumnBehavior : MonoBehaviour
 
     void swipe()
     {
-        if (isGameOver == false && hasSwiped == false)
+        if (isGameOver == false)
         {
-
             if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
             {
                 touchTimeStart = Time.time;
@@ -98,14 +89,8 @@ public class ColumnBehavior : MonoBehaviour
                 endPos = Input.GetTouch(0).position;
                 direction = startPos - endPos;
                 GetComponent<Rigidbody2D>().AddForce(-direction / timeInterval * throwForce);
-                if (startPos != endPos)
-                {
-                    hasSwiped = true;
-                }
             }
-
         }
-
     }
     
 }
