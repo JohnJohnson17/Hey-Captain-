@@ -7,6 +7,7 @@ using TMPro;
 public class ScoreScript : MonoBehaviour
 {
     public static int scoreVal;
+    public static int personalRecord = 0;
 
     TMP_Text score;
     // Start is called before the first frame update
@@ -24,6 +25,16 @@ public class ScoreScript : MonoBehaviour
         } else
         {
             score.text = "" + scoreVal;
+        }
+
+        checkBest(scoreVal);
+    }
+
+    void checkBest(int x)
+    {
+        if (x > personalRecord)
+        {
+            personalRecord = x;
         }
     }
 }
