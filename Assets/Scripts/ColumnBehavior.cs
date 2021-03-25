@@ -6,6 +6,16 @@ public class ColumnBehavior : MonoBehaviour
 {
     bool isGameOver = false;
 
+    bool enableClouds = false;
+
+    bool quit;
+
+    int randClouds;
+
+    public int CHANCE = 50;
+
+    public int CLOUDSSTART = 1;
+
     Vector2 startPos, endPos, direction;
     float touchTimeStart, touchTimeFinish, timeInterval;
 
@@ -19,6 +29,8 @@ public class ColumnBehavior : MonoBehaviour
     public bool hasSwiped;
 
     public GameOverScript GameOverScreen;
+
+    public CloudBehavior clouds;
 
     private void Start()
     {
@@ -36,6 +48,10 @@ public class ColumnBehavior : MonoBehaviour
 
         updateScore(columnPosX);
 
+        checkEnableClouds();
+
+        checkClouds();
+
         GameOver(columnPosY);
         
     }
@@ -48,6 +64,12 @@ public class ColumnBehavior : MonoBehaviour
             {
                 incrementScore();
                 hasSwiped = false;
+
+                if (enableClouds)
+                {
+                    setRandNum();
+
+                }
             } else if (ScoreScript.scoreVal < 0) {
                 incrementScore();
                 hasSwiped = false;
@@ -61,6 +83,13 @@ public class ColumnBehavior : MonoBehaviour
             {
                 hasSwiped = false;
                 incrementScore();
+
+                if (enableClouds)
+                {
+                    setRandNum();
+
+                }
+
             }
 
             getSide = true;
@@ -77,6 +106,7 @@ public class ColumnBehavior : MonoBehaviour
         if (x < -2.0)
         {
             GameOverScreen.setup(ScoreScript.scoreVal);
+            clouds.cloudsGameOver();
             isGameOver = true;
         }
     }
@@ -106,6 +136,38 @@ public class ColumnBehavior : MonoBehaviour
 
         }
 
+    }
+
+    //CLOUDS
+
+    void doClouds()
+    {
+        enableClouds = false;
+        setRandNum();
+        clouds.setup();
+        enableClouds = true;
+    }
+
+    void checkClouds()
+    {
+
+        if (randClouds == 1 && enableClouds == true)
+        {
+            doClouds();
+        }
+    }
+
+    void checkEnableClouds()
+    {
+        if (ScoreScript.scoreVal == CLOUDSSTART)
+        {
+            enableClouds = true;
+        }
+    }
+
+    void setRandNum()
+    {
+        randClouds = Random.Range(1, CHANCE);
     }
     
 }
