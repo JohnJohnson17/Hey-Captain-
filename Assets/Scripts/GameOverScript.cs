@@ -14,7 +14,7 @@ public class GameOverScript : MonoBehaviour
     {
         gameObject.SetActive(true);
         pointsText.text = score + " POINTS";
-        personalRecord.text = "BEST: " + ScoreScript.personalRecord + " POINTS";
+        personalRecord.text = "BEST: " + PlayerPrefs.GetInt("highscore", 0).ToString() + " POINTS";
     }
 
     public void restartButton()

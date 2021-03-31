@@ -7,7 +7,6 @@ using TMPro;
 public class ScoreScript : MonoBehaviour
 {
     public static int scoreVal;
-    public static int personalRecord = 0;
 
     TMP_Text score;
     // Start is called before the first frame update
@@ -32,9 +31,9 @@ public class ScoreScript : MonoBehaviour
 
     void checkBest(int x)
     {
-        if (x > personalRecord)
+        if (x > PlayerPrefs.GetInt("highscore", 0))
         {
-            personalRecord = x;
+            PlayerPrefs.SetInt("highscore", x);
         }
     }
 }
