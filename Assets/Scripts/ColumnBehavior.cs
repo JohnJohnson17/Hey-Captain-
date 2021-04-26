@@ -130,6 +130,7 @@ public class ColumnBehavior : MonoBehaviour
                 GetComponent<Rigidbody2D>().AddForce(-direction / timeInterval * throwForce);
                 if (startPos != endPos)
                 {
+                    SoundManagerScript.playSound("Chop #1");
                     hasSwiped = true;
                 }
             }
