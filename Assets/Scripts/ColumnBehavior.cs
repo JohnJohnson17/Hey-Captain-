@@ -32,6 +32,8 @@ public class ColumnBehavior : MonoBehaviour
 
     public CloudBehavior clouds;
 
+    public PlayfabManager playfabManager;
+
     private void Start()
     {
         ScoreScript.scoreVal = -1;
@@ -52,7 +54,11 @@ public class ColumnBehavior : MonoBehaviour
 
         checkClouds();
 
-        GameOver(columnPosY);
+        if (isGameOver == false)
+        {
+            GameOver(columnPosY);
+
+        }
         
     }
 
@@ -108,6 +114,8 @@ public class ColumnBehavior : MonoBehaviour
             GameOverScreen.setup(ScoreScript.scoreVal);
             clouds.cloudsGameOver();
             isGameOver = true;
+            playfabManager.SendLeaderboard(ScoreScript.scoreVal);
+            playfabManager.GetLeaderboard();
         }
     }
 
