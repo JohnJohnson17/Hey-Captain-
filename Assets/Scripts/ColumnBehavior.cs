@@ -38,6 +38,7 @@ public class ColumnBehavior : MonoBehaviour
     {
         ScoreScript.scoreVal = -1;
         getSide = false;
+        playfabManager.GetLeaderboard();
     }
 
     void Update()
@@ -57,7 +58,6 @@ public class ColumnBehavior : MonoBehaviour
         if (isGameOver == false)
         {
             GameOver(columnPosY);
-
         }
         
     }
@@ -113,9 +113,9 @@ public class ColumnBehavior : MonoBehaviour
         {
             GameOverScreen.setup(ScoreScript.scoreVal);
             clouds.cloudsGameOver();
-            isGameOver = true;
             playfabManager.SendLeaderboard(ScoreScript.scoreVal);
             playfabManager.GetLeaderboard();
+            isGameOver = true;
         }
     }
 

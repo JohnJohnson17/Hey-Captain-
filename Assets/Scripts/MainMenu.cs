@@ -12,4 +12,11 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("GameScene");
     
     }
+
+    public void tutorial()
+    {
+        SceneManager.LoadScene("Tutorial");
+    }
+
+   
 }
