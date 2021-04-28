@@ -13,6 +13,8 @@ public class SoundManagerScript : MonoBehaviour
     {
 
         chopOne = Resources.Load<AudioClip>("Chop #1");
+        chopTwo = Resources.Load<AudioClip>("Chop #2");
+        chopThree = Resources.Load<AudioClip>("Chop #3");
 
         audioSrc = GetComponent<AudioSource>();
 
